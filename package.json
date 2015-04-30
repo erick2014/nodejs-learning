@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/erick2014/nodejs-learning",
   "dependencies": {
-    "connect": "^3.3.5"
+    "connect": "^3.3.5",
+    "express": "^4.12.3"
   }
 }
