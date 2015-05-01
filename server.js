@@ -1,16 +1,11 @@
-const express=require('express');
-const app=express();
+//set a port to listen to
 const port=3000;
+/*include the configuration file
+  also load the route and its controller
+*/
+const app=require("./config/express")();
 
-//middleware for root path
-app.use("/",function(req,res){
-  res.send("Hello world!");
-});
-
-//set webserver's port
+//port to listen to
 app.listen(port);
-//using string template ecmascript 6
-console.log(`Server running at http://localhost:${port}`);
-
-//export app instance
-module.exports=app;
+//show a message whe server is running
+console.log(`Server listening at port ${port}`);
