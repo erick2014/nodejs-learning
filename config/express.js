@@ -40,5 +40,8 @@ module.exports=function(){
   //include the index route
   require("../app/routes/index.server.routes.js")(app);
 
+  //add the public files using static middleware from express
+  app.use(express.static('./public'));
+
   return app;
 };
