@@ -1,3 +1,5 @@
+//if there is not an environment then set it
+process.env.NODE_ENV= process.env.NODE_ENV || 'development'
 //set a port to listen to
 const port=3000;
 /*include the configuration file
