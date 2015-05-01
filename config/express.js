@@ -32,6 +32,11 @@ module.exports=function(){
   //load the override middleware
   app.use(methodOverride());
 
+  //set the directory where template files are located
+  app.set('views','../app/views');
+  //set the template engine(ejs)
+  app.set('view engine','ejs')
+
   //include the index route
   require("../app/routes/index.server.routes.js")(app);
 
