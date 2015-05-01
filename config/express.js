@@ -1,3 +1,5 @@
+//use the environment's configuration file
+const config=require('./config');
 //express module
 const express=require('express');
 //this provides a simple logger middleware
@@ -31,6 +33,12 @@ module.exports=function(){
   app.use(bodyParser.json());
   //load the override middleware
   app.use(methodOverride());
+  //load the session middleware
+  app.use(session({
+    saveUninitialized:true,
+    resave:true,
+    secret:config.sessionSecret
+  }))
 
   //set the directory where template files are located
   app.set('views','./app/views/');
