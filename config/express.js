@@ -33,7 +33,7 @@ module.exports=function(){
   app.use(methodOverride());
 
   //set the directory where template files are located
-  app.set('views','../app/views');
+  app.set('views','./app/views/');
   //set the template engine(ejs)
   app.set('view engine','ejs')
 
