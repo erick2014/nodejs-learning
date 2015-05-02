@@ -10,6 +10,8 @@ const compress=require("compression");
 const bodyParser=require("body-parser");
 //this provides delete and put verbs
 const methodOverride=require("method-override");
+//this module provides session functionality o:
+const session=require("express-session");
 
 module.exports=function(){
   //get an express instance
@@ -34,10 +36,12 @@ module.exports=function(){
   //load the override middleware
   app.use(methodOverride());
   //load the session middleware
+
   app.use(session({
     saveUninitialized:true,
-    resave:true,
+    resave:false,
     secret:config.sessionSecret
+    name:"express"
   }))
 
   //set the directory where template files are located
