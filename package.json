@@ -24,6 +24,7 @@
     "express": "^4.12.3",
     "express-session": "^1.11.1",
     "method-override": "^2.3.2",
+    "mongoose": "^4.0.2",
     "morgan": "^1.5.2"
   }
 }
