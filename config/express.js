@@ -40,7 +40,7 @@ module.exports=function(){
   app.use(session({
     saveUninitialized:true,
     resave:false,
-    secret:config.sessionSecret
+    secret:config.sessionSecret,
     name:"express"
   }))
 
