@@ -10,7 +10,6 @@ module.exports=function(app){
   .get(users.listUsers)
   .post(users.create)
 
-
   //this method will be called before the route method
   //when a user requests the /users path passing in a parameter
   app.param("userId",users.userById);
@@ -18,6 +17,6 @@ module.exports=function(app){
   //this route will handle the requests to the users path but
   //passing in an id of a document
   app.route('/users/:userId')
-    .get(users.read);
-
+    .get(users.read)//perform a search by id
+    .put(users.update)//perform an update by id
 }

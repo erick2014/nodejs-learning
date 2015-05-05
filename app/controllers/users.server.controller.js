@@ -23,10 +23,11 @@ exports.create=function(req,res,next){
   });
 }
 
+//this method is for listing the documents(all)
 exports.listUsers=function(req,res,next){
   console.log("user Model",User);
   //performing a query that matches all documents
-  User.find({},'email username',function(err,docs){
+  User.find({},'firstName email username',function(err,docs){
     if(err){
       return next(err);
     }else{
@@ -45,8 +46,8 @@ exports.read=function(req,res){
 //this function will get the document by id
 exports.userById=function(req,res,next,id){
   User.findOne(
-    { _id:id },     //param
-    'username email', //projection
+    { _id:id },
+    'firstName username email', //projection
     function(err,userFound){ //callback
       //if there was an error, then pass it to the next middleware
       if(err){
@@ -61,3 +62,18 @@ exports.userById=function(req,res,next,id){
     }
   );
 }
+
+exports.update=function(req,res,next){
+  console.log("calling update() ",req.user);
+  User.findByIdAndUpdate(
+    req.user.id,
+    req.body,
+    function(err,user){
+      if(err){
+        return next(err);
+      }else{
+        res.end("the thing was updated with= ",req.body);
+      }
+    }
+  );
+};
