@@ -9,4 +9,15 @@ module.exports=function(app){
   app.route('/users')
   .get(users.listUsers)
   .post(users.create)
+
+
+  //this method will be called before the route method
+  //when a user requests the /users path passing in a parameter
+  app.param("userId",users.userById);
+
+  //this route will handle the requests to the users path but
+  //passing in an id of a document
+  app.route('/users/:userId')
+    .get(users.read);
+
 }

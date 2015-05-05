@@ -26,7 +26,7 @@ exports.create=function(req,res,next){
 exports.listUsers=function(req,res,next){
   console.log("user Model",User);
   //performing a query that matches all documents
-  User.find({},function(err,docs){
+  User.find({},'email username',function(err,docs){
     if(err){
       return next(err);
     }else{
@@ -34,4 +34,30 @@ exports.listUsers=function(req,res,next){
       res.json(docs);
     }
   })
+}
+
+//exports a function that responds with a json object
+exports.read=function(req,res){
+  res.send("the user founded was:"+req.user);
+  //res.json(req.user);
+}
+
+//this function will get the document by id
+exports.userById=function(req,res,next,id){
+  User.findOne(
+    { _id:id },     //param
+    'username email', //projection
+    function(err,userFound){ //callback
+      //if there was an error, then pass it to the next middleware
+      if(err){
+        return next(err);
+      }else{
+        //set the user founded to the request object,
+        //to later print it out throught the response object
+        req.user=userFound;
+        //call the next middleware(the read() middleware)
+        next();
+      }
+    }
+  );
 }
