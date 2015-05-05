@@ -19,4 +19,5 @@ module.exports=function(app){
   app.route('/users/:userId')
     .get(users.read)//perform a search by id
     .put(users.update)//perform an update by id
+    .delete(users.delete)
 }

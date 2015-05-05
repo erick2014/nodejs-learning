@@ -39,8 +39,12 @@ exports.listUsers=function(req,res,next){
 
 //exports a function that responds with a json object
 exports.read=function(req,res){
+  if(req.user==null){
+    res.send("omg the user doesn't exits yet");
+  }else{
   res.send("the user founded was:"+req.user);
   //res.json(req.user);
+  }
 }
 
 //this function will get the document by id
@@ -63,8 +67,8 @@ exports.userById=function(req,res,next,id){
   );
 }
 
+//this method will update a document using the id received on the request
 exports.update=function(req,res,next){
-  console.log("calling update() ",req.user);
   User.findByIdAndUpdate(
     req.user.id,
     req.body,
@@ -72,8 +76,21 @@ exports.update=function(req,res,next){
       if(err){
         return next(err);
       }else{
-        res.end("the thing was updated with= ",req.body);
+        res.send("User updated=",req.body);
       }
     }
   );
 };
+
+//this method deletes a document using its id
+exports.delete=function(req,res,next){
+  User.remove(req.user,function(err,query){
+    if(err){
+      res.send("were an error deleting the thing..")
+    }
+    else{
+     res.send("user deleted=",query)
+    }
+  })
+
+}
