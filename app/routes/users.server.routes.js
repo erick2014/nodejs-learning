@@ -4,11 +4,19 @@
 const users=require("../controllers/users.server.controller");
 //export the route passing it the app object
 module.exports=function(app){
+  //add some random data to the db
+  app.route("/generateData")
+    .get(users.generateData);
+
   //enable users path to handle post requests and create a new user
   //calling the create method from users controller
   app.route('/users')
   .get(users.listUsers)
   .post(users.create)
+
+  app.param("userName",users.userByName);
+  app.route("/users/:userName")
+    .get(users.read);
 
   //this method will be called before the route method
   //when a user requests the /users path passing in a parameter
@@ -20,4 +28,7 @@ module.exports=function(app){
     .get(users.read)//perform a search by id
     .put(users.update)//perform an update by id
     .delete(users.delete)
+
+
+
 }

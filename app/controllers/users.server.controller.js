@@ -1,3 +1,4 @@
+'use strict'
 /*User Controller, that Handles User model requests */
 const User=require("mongoose").model('User');
 
@@ -39,9 +40,9 @@ exports.listUsers=function(req,res,next){
 exports.read=function(req,res){
   if(req.user==null){
     res.send("omg the user doesn't exits yet");
-  }else{
-  res.send("the user founded was:"+req.user);
-  //res.json(req.user);
+  }
+  else{
+    res.send("the user founded was:"+req.user);
   }
 }
 
@@ -61,6 +62,15 @@ exports.userById=function(req,res,next,id){
         //call the next middleware(the read() middleware)
         next();
       }
+    }
+  );
+}
+
+exports.userByName=function(req,res,next,name){
+  User.findOne({"firstName":name},'firstName lastName created',
+    function(err,user){
+      if(err) res.send(err);
+      else req.user=user;next();
     }
   );
 }
@@ -90,5 +100,32 @@ exports.delete=function(req,res,next){
      res.send("user deleted=",query)
     }
   })
+
+}
+
+//this will generate a bunch of data into db
+exports.generateData=function(req,res,next){
+
+  for(let i=1;i<=10000;i++){
+    let firstName="umm_"+i;
+    let lastName="jamm_"+i;
+
+    let user=new User({
+      "firstName":firstName,
+      "lastName":lastName
+    });
+
+    user.save(function( err,data ){
+      if(err){
+        console.log("something were wrong O:");
+        res.send("was an error populating the db");
+      }else{
+        console.log(data);
+      }
+    })
+  }
+
+  //end the request ofcourse man
+  res.end("Thats all :)");
 
 }

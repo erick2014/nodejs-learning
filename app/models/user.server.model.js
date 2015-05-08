@@ -39,7 +39,9 @@ var UserSchema=new Schema({
         return 'none';
       }
       return `hey body ${name}`;
-    }
+    },
+    //lets add an index
+    index:true
   },
   lastName:{ type:String, default:""},
   email:{ type:String, default:""},
