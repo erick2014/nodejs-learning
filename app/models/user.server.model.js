@@ -23,10 +23,24 @@ var UserSchema=new Schema({
       else if( url.match(/http/i) == null ){
         return 'http://'+url;
       }
+      //if it has http then just return the url
+      else{
+        return url;
+      }
     }
   },
   //set default values for each field and its type
-  firstName:{ type:String, default:""},
+  firstName:{
+    type:String,
+    //this getter will add some text to the first name field value
+    //when returning the data to the view
+    get:function(name){
+      if(!name){
+        return 'none';
+      }
+      return `hey body ${name}`;
+    }
+  },
   lastName:{ type:String, default:""},
   email:{ type:String, default:""},
   //trim is a modifier that deletes spaces at the end and the begining
@@ -35,8 +49,13 @@ var UserSchema=new Schema({
   created: { type:String, default:Date.now}
 });
 
-//enable the getters
-//UserSchema.set({getter:true})
+//enable virtual attribute that joins firstName and LastName fields
+UserSchema.virtual('fullName').get(function(){
+  return this.firstName+' '+this.lastName;
+})
+
+//enable the getters whe using to json method and enable virtual attributes
+UserSchema.set('toJSON',{getters:true,virtuals:true})
 
 //Use the UserSchema instance to define the user model
 mongoose.model('User',UserSchema);

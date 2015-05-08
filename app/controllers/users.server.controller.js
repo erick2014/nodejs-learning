@@ -24,14 +24,14 @@ exports.create=function(req,res,next){
 
 //this method is for listing the documents(all)
 exports.listUsers=function(req,res,next){
-  console.log("user Model",User);
   //performing a query that matches all documents
-  User.find({},'firstName email username',function(err,docs){
-    if(err){
-      return next(err);
-    }else{
-      res.json(docs);
-    }
+  User.find({},'firstName lastName email username',
+    function(err,docs){
+      if(err){
+        return next(err);
+      }else{
+        res.json(docs);
+      }
   })
 }
 
