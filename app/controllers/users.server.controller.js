@@ -6,7 +6,6 @@ exports.create=function(req,res,next){
   //get an instance of User model passing it the
   //request body
   var user=new User(req.body);
-  console.log("User instance",user);
 
   //save the user and outputs the user object as json
   user.save(function(err){
@@ -31,7 +30,6 @@ exports.listUsers=function(req,res,next){
     if(err){
       return next(err);
     }else{
-      console.log("docs returned",docs)
       res.json(docs);
     }
   })
