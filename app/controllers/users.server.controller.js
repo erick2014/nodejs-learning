@@ -20,7 +20,7 @@ exports.create=function(req,res,next){
     }
 
   });
-}
+};
 
 //this method is for listing the documents(all)
 exports.listUsers=function(req,res,next){
