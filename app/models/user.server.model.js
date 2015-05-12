@@ -40,15 +40,42 @@ var UserSchema=new Schema({
       }
       return `hey body ${name}`;
     },
-    //lets add an index
+    //lets add an index to later search by this field
     index:true
   },
-  lastName:{ type:String, default:""},
-  email:{ type:String, default:""},
+  //add required validator for lastName field
+  lastName:{
+            type:String, default:"",
+            required:'{PATH} field is required'
+          },
+  //add match validator for email field
+  email:{
+          type:String, default:"",
+          match:[/\S+@\S+\.\S+/,"{PATH} field is invalid"]
+        },
   //trim is a modifier that deletes spaces at the end and the begining
   username:{ type:String, default:"",trim:true},
-  password:{ type:String, default:""},
-  created: { type:String, default:Date.now}
+  password:{
+    type:String, default:"",
+    //verify the password's length
+    validate:[
+      function(pass){
+        if( pass.length < 3 ){
+          return false;
+        }
+        return pass;
+      },'{PATH} field is too short'
+    ]
+  },
+  created: { type:String, default:Date.now},
+  //add the enum validator to state field
+  state:{
+    type:String,
+    default:"A",
+    enum:{
+      values:["A","I"],message:"field {PATH} require as values (A,I)"
+    }
+  }
 });
 
 //enable virtual attribute that joins firstName and LastName fields

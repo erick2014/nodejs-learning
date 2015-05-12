@@ -1,3 +1,4 @@
+'use strict'
 /*This route will controll the route for users */
 
 //include the users controller
@@ -29,6 +30,25 @@ module.exports=function(app){
     .put(users.update)//perform an update by id
     .delete(users.delete)
 
+  //error middleware handler
+  app.use(function(err,req,res,next){
+    let strErrors="";
+
+    if( err.errors ){
+      let errsKeys=Object.keys(err.errors);
+      let objLength=errsKeys.length;
+      //loop each error and create a string
+      for(let i=objLength;i--;){
+        strErrors+=err.errors[errsKeys[i]].message+","
+      }
+      //remove the last comma
+      strErrors= strErrors.substring(0,(strErrors.length-1));
+
+    }else{
+      strErrors="check the request syntax "+err;
+    }
+    res.send(strErrors);
+  })
 
 
 }
