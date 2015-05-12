@@ -7,6 +7,8 @@ module.exports=function(){
   var db=mongoose.connect(config.db);
   //include the user model
   require("../app/models/user.server.model");
+  //include the post's model
+  require("../app/models/posts.server.model");
   //return a moongose instance
   return db;
 }

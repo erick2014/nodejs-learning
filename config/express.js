@@ -53,6 +53,8 @@ module.exports=function(){
   require("../app/routes/index.server.routes.js")(app);
   //include the users route
   require("../app/routes/users.server.routes")(app);
+  //inclue the posts route
+  require("../app/routes/posts.server.routes")(app);
 
   //add the public files using static middleware from express
   app.use(express.static('./public'));
