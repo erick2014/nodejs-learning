@@ -1,9 +1,10 @@
-//include mongoose module
-const mongoose=require("mongoose");
+'use strict'
 //create a schema
+const mongoose=require("mongoose");
+//get the schema object
 const Schema=mongoose.Schema;
 
-//define a post schema
+//Create a new instance of schema
 var PostSchema=new Schema({
   title:{
     type:String,

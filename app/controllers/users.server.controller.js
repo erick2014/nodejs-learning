@@ -25,6 +25,7 @@ exports.create=function(req,res,next){
 
 //this method is for listing the documents(all)
 exports.listUsers=function(req,res,next){
+
   //performing a query that matches all documents
   User.find({},'firstName lastName email username',
     function(err,docs){

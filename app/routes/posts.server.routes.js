@@ -10,10 +10,7 @@ module.exports=function(app){
   //enable posts route
   app.route('/posts')
   .get(posts.listPosts)
-  .post(posts.findByID)
-
-  //next middleware
-  app.use(posts.create);
+  .post(posts.create)
 
   //error middleware handler
   app.use(function(err,req,res,next){

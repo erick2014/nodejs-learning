@@ -1,30 +1,38 @@
+/**************User Controller, that Handles User model requests **************/
 'use strict'
-/*User Controller, that Handles User model requests */
-const Post=require("mongoose").model('Post');
+//include the mongoose mdule
+const mongoose=require("mongoose");
+//include the post's model
+const Post=mongoose.model('Post');
+//include the user's model
+const User=mongoose.model('User');
 
 //expose a create function to later create new users
 exports.create=function(req,res,next){
-  //check if the user was found
-  if( req.user ){
-    //create a new instance for post model
-    let post=new Post(req.body);
-
-    //save the user and outputs the user object as json
-    post.save(function(err){
-      //catch any error
-      if(err){
-        //pass the error to the error middleware handler
-        return next(err);
-      }
-      else{
-        //send a response as json
-        res.send("post saved!"+post);
-      }
-    });
-  }
-  else{
-    return next("No user received to save")
-  }
+  console.log("calling create method from posts...");
+  //check if the user exists before to save it!
+  User.userExists(req.body.author,function(userFound){
+    //if there was a valid user then save it!
+    if(userFound){
+      //create a new instance for post model and pass in the request body
+      let post=new Post(req.body);
+      //save the user and outputs the user object as json
+      post.save(function(err){
+        //catch any error
+        if(err){
+          //pass the error to the error middleware handler
+          return next(err);
+        }
+        else{
+          //send a response as json
+          res.send("post saved!"+post);
+        }
+      });
+    }
+    else{
+      res.send("You need a valid author to save the post!")
+    }
+  })
 
 };
 

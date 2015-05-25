@@ -12,6 +12,8 @@ const bodyParser=require("body-parser");
 const methodOverride=require("method-override");
 //this module provides session functionality o:
 const session=require("express-session");
+//load the passport module
+const passport=require('passport');
 
 module.exports=function(){
   //get an express instance
@@ -43,6 +45,11 @@ module.exports=function(){
     secret:config.sessionSecret,
     name:"express"
   }))
+
+  //register the initialize middleware(required to initialize Passport)
+  app.use(passport.initialize());
+  //this middleware is responsible to keep track of user's session
+  app.use(passport.session());
 
   //set the directory where template files are located
   app.set('views','./app/views/');
