@@ -1,0 +1,23 @@
+<!--Signup view using jade as template string-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> <%= title %> </title>
+</head>
+<body>
+  <!-- loop for messages -->
+  <% for(var i in messages){ %>
+    <div class="flash"><%= messages[i] %></div>
+  <% } %>
+  <!-- form login-->
+  <form action="/signup" method="post" id="signUpUser">
+    <div><label for="firstName">First Name:</label><input type="text" name="firstName"></div>
+    <div><label for="lastName">Last Name:</label><input type="text" name="lastName"></div>
+    <div><label for="email">Email:</label><input type="text" name="firstName"></div>
+    <div><label for="username">UserName:</label><input type="text" name="username"></div>
+    <div><label for="password">Password:</label><input type="text" name="password"></div>
+    <div><input type="submit" value="sign up"></div>
+  </form>
+</body>
+</html>

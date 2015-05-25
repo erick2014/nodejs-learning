@@ -113,7 +113,7 @@ UserSchema.methods.hashPass=function(pass){
   return crypto.pbkdf2Sync(pass,this.salt,10000,64).toString('base64');
 }
 
-//check if the received pass is equal to the pass that is encrypted
+//define an instance method that compares the hashed pass and the password passed as param
 UserSchema.methods.authenticate=function(pass){
   return this.password == this.hashPass(pass)
 }
