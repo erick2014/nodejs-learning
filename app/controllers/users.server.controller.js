@@ -1,6 +1,60 @@
-'use strict'
 /*User Controller, that Handles User model requests */
+'use strict'
 const User=require("mongoose").model('User');
+//include the authentication module
+const passport=require("passport");
+
+//define an anonymous function that parses the authentication errors
+let getErrorMessage=function(err){
+  let message="";
+  if( err.code ){
+    //define some code errors
+    switch( err.code ){
+      case 11000:
+      case 11001:
+        message='Username already exists!';
+        break;
+      default:
+        message="Something went wrong";
+    }
+  }
+  else{
+    //loop through errors
+    /*for( let errName in err.errors){
+      if( err.errors[errName].message ){
+        message=err.errors[err]
+      }
+    }*/
+    message=err.errors;
+  }
+  return message;
+}
+
+//define a render Signin method for login purposes
+exports.renderSignin=function(req,res,next){
+  //check if the user is logged in
+  if(!req.user){
+    res.render(
+      'signin',
+      {title:"Sign-in form",messages:req.flash('error') || req.flash('info') }
+    );
+  }
+  else{ return res.redirect("/"); }
+}
+
+//define a render Signup method to registering purposes
+exports.renderSignup=function(req,res,next){
+  //check if the user is logged in
+  if( !req.user ){
+    res.render(
+      'signup',
+      {title:"Sign-up form",messages:req.flash('error') || req.flash('info') }
+    );
+  }
+  else{ return res.redirect("/"); }
+}
+
+
 
 //expose a create function to later create new users
 exports.create=function(req,res,next){

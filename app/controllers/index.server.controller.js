@@ -1,4 +1,6 @@
+'use strict'
 /*Index controller */
+
 exports.render=function(req,res){
   var sess=req.session
   //well here, im trying to get the view property from session
@@ -10,5 +12,7 @@ exports.render=function(req,res){
   else{
     sess.views=1;
   }
+
   res.render('index',{title:"Index Page",content:"amm some text over here.."});
+
 }
