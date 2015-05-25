@@ -1,5 +1,7 @@
 //use the environment's configuration file
 const config=require('./config');
+//include the flash messages module
+const flash=require("connect-flash");
 //express module
 const express=require('express');
 //this provides a simple logger middleware
@@ -50,6 +52,9 @@ module.exports=function(){
   app.use(passport.initialize());
   //this middleware is responsible to keep track of user's session
   app.use(passport.session());
+
+  //load the flash middleware
+  app.use(flash());
 
   //set the directory where template files are located
   app.set('views','./app/views/');
