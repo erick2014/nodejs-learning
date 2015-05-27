@@ -15,8 +15,7 @@ module.exports=function(){
       done(err,user);
     })
   });
-
+  console.log("calling the passport config file...")
   //include the local strategy
   require('./strategies/local.js')();
-
 };

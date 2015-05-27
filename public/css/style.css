@@ -1,3 +1,7 @@
 div{
-  background-color: red;
+  background-color: green;
+}
+
+.errorMessage{
+  color:blue;
 }

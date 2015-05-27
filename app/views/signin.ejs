@@ -4,17 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <title> <%= title %> </title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- loop for messages -->
-  <% for(var i in messages){ %>
-    <div class="flash"><%= messages[i] %></div>
-  <% } %>
+
   <!-- form login-->
   <form action="/signin" method="post" id="signUpUser">
     <div><label for="username">UserName:</label><input type="text" name="username"></div>
     <div><label for="password">Password:</label><input type="text" name="password"></div>
     <div><input type="submit" value="sign in"></div>
   </form>
+  <div class="errorMessage"><%= messages %></div>
+
 </body>
 </html>

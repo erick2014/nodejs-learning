@@ -1,7 +1,5 @@
 //use the environment's configuration file
 const config=require('./config');
-//include the flash messages module
-const flash=require("connect-flash");
 //express module
 const express=require('express');
 //this provides a simple logger middleware
@@ -14,6 +12,8 @@ const bodyParser=require("body-parser");
 const methodOverride=require("method-override");
 //this module provides session functionality o:
 const session=require("express-session");
+//include the flash messages module
+const flash=require("connect-flash");
 //load the passport module
 const passport=require('passport');
 
@@ -53,13 +53,13 @@ module.exports=function(){
   //this middleware is responsible to keep track of user's session
   app.use(passport.session());
 
-  //load the flash middleware
-  app.use(flash());
-
   //set the directory where template files are located
   app.set('views','./app/views/');
   //set the template engine(ejs)
   app.set('view engine','ejs')
+
+  //load the flash middleware
+  app.use(flash());
 
   //include the index route
   require("../app/routes/index.server.routes.js")(app);

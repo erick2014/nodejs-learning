@@ -13,6 +13,10 @@ exports.render=function(req,res){
     sess.views=1;
   }
 
-  res.render('index',{title:"Index Page",content:"amm some text over here.."});
+  res.render('index',{
+    title:"Index Page",
+    content:"amm some text over here..",
+    messages:req.flash("error")
+  });
 
 }

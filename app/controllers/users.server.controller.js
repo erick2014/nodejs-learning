@@ -25,6 +25,7 @@ let getErrorMessage=function(err){
         message=err.errors[err]
       }
     }*/
+
     message=err.errors;
   }
   return message;
@@ -32,19 +33,22 @@ let getErrorMessage=function(err){
 
 //define a render Signin method for login purposes
 exports.renderSignin=function(req,res,next){
-  //check if the user is logged in
+  //check if the user is not logged in
   if(!req.user){
+    //console.log( "rendering the signin page", req.flash("error") );
     res.render(
       'signin',
-      {title:"Sign-in form",messages:req.flash('error') || req.flash('info') }
+      {title:"Sign-in form",messages:req.flash("error")}
     );
   }
-  else{ return res.redirect("/"); }
+  else{
+    return res.redirect("/");
+  }
 }
 
 //define a render Signup method to registering purposes
 exports.renderSignup=function(req,res,next){
-  //check if the user is logged in
+  //check if the user is not logged in
   if( !req.user ){
     res.render(
       'signup',
@@ -54,6 +58,13 @@ exports.renderSignup=function(req,res,next){
   else{ return res.redirect("/"); }
 }
 
+exports.signUpProcess=function(){
+  //check if the user is not logged in
+  if( !req.user ){
+    //first get an instance from User model
+
+  }
+}
 
 
 //expose a create function to later create new users

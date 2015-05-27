@@ -3,8 +3,24 @@
 
 //include the users controller
 const users=require("../controllers/users.server.controller");
+//include the passport module
+const passport=require("passport");
+
+
 //export the route passing it the app object
 module.exports=function(app){
+
+  //add a sigin route
+  app.route('/signin')
+    .get(users.renderSignin) //when performs a get request, render the signin view
+    //when posting something try to authenticate
+    .post( passport.authenticate(
+      'local',
+      { successRedirect: '/',
+        failureRedirect: '/signin',
+        failureFlash: true}
+    ));
+
   //add some random data to the db
   app.route("/generateData")
     .get(users.generateData);
