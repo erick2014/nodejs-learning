@@ -4,17 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <title> <%= title %> </title>
+  <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <!-- form login-->
-  <form action="/signin" method="post" id="signUpUser">
-    <div><label for="username">UserName:</label><input type="text" name="username"></div>
-    <div><label for="password">Password:</label><input type="text" name="password"></div>
-    <div><input type="submit" value="sign in"></div>
-  </form>
-  <div class="errorMessage"><%= messages %></div>
+  <div id="wrapper">
+    <h1>Sign in</h1>
+    <!-- form login-->
+    <form action="/signin" method="post" id="signUpUser">
+      <label id="userName"for="username">User name:</label><input type="text" name="username">
+      <label for="password">Password:</label><input type="text" name="password">
+      <input type="submit" value="sign in" />
+    </form>
+    <div class="errorMessage"><%= messages %></div>
+  </div>
 
 </body>
 </html>
