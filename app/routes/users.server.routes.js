@@ -25,6 +25,9 @@ module.exports=function(app){
     .get(users.renderSignup)
     .post(users.signupProcess) //receive data for signup
 
+  app.route("/signout")
+    .get(users.signout)
+
   //add some random data to the db
   app.route("/generateData")
     .get(users.generateData);

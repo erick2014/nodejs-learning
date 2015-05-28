@@ -39,9 +39,9 @@ var UserSchema=new Schema({
     //when returning the data to the view
     get:function(name){
       if(!name){
-        return 'none';
+        return name;
       }
-      return `hey body ${name}`;
+      return `hey buddy ${name}`;
     },
     //lets add an index to later search by this field
     index:true
@@ -97,7 +97,7 @@ var UserSchema=new Schema({
 
 //enable virtual attribute that joins firstName and LastName fields
 UserSchema.virtual('fullName').get(function(){
-  return this.firstName+' '+this.lastName;
+   return this.firstName+' '+this.lastName;
 });
 
 //Pre save middleware, this will hash the pass before save the user

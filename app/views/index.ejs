@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>O: <%= title %></title>
-  <link rel="stylesheet" href="css/style.css"></link>
-</head>
-<body>
-  <img src="img/logo.jpg" alt="Logo">
-  <div><%= messages %></div>
-  <div>O: <%= content %></div>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>O: <%= title %></title>
+    <link rel="stylesheet" href="css/style.css"></link>
+  </head>
+  <body>
+    <img src="img/logo.jpg" alt="Logo">
+    <div>O: <%= content %></div>
+    <!-- if the user is logged in show its name-->
+    <% if( userFullName ){ %>
+      <h2> <%= userFullName %> </h2>
+      <a href="/signout">Sign out </a>
+    <% }else{ %>
+        <a href="/signin">Signin</a>
+        <a href="/signup">Signout</a>
+    <% } %>
+  </body>
 </html>

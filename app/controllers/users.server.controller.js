@@ -56,6 +56,7 @@ exports.renderSignup=function(req,res,next){
   else{ return res.redirect("/"); }
 }
 
+//define a Signup method to registering a new user
 exports.signupProcess=function(req,res,next){
   //check if the user is not logged in
   if( !req.user ){
@@ -86,6 +87,13 @@ exports.signupProcess=function(req,res,next){
   else{
     res.redirect("/")
   }
+}
+
+//define the signout method
+exports.signout=function(req,res){
+  //the logout method is exposed by pasport module to invalidate a session
+  req.logout();
+  res.redirect("/");
 }
 
 //expose a create function to later create new users
