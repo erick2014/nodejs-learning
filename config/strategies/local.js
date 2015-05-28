@@ -13,7 +13,6 @@ module.exports=function(){
     //get an instance of local Strategy and pass in a callback
     //the callback will get executed when an user is trying to authenticate
     new LocalStrategy(function(username,password,done){
-
       //look for an user using User's model
       User.findOne(
         //pass the query and pass it the username received as value

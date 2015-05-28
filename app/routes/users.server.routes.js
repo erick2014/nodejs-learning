@@ -21,6 +21,10 @@ module.exports=function(app){
         failureFlash: true}
     ));
 
+  app.route("/signup")
+    .get(users.renderSignup)
+    .post(users.signupProcess) //receive data for signup
+
   //add some random data to the db
   app.route("/generateData")
     .get(users.generateData);

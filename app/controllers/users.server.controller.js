@@ -20,13 +20,11 @@ let getErrorMessage=function(err){
   }
   else{
     //loop through errors
-    /*for( let errName in err.errors){
+    for( let errName in err.errors){
       if( err.errors[errName].message ){
-        message=err.errors[err]
+        message+=err.errors[errName].message+"--";
       }
-    }*/
-
-    message=err.errors;
+    }
   }
   return message;
 }
@@ -52,20 +50,43 @@ exports.renderSignup=function(req,res,next){
   if( !req.user ){
     res.render(
       'signup',
-      {title:"Sign-up form",messages:req.flash('error') || req.flash('info') }
+      {title:"Sign-up form",messages:req.flash('error') }
     );
   }
   else{ return res.redirect("/"); }
 }
 
-exports.signUpProcess=function(){
+exports.signupProcess=function(req,res,next){
   //check if the user is not logged in
   if( !req.user ){
     //first get an instance from User model
+    let user=new User(req.body);
+    let message=null;
+    //set the provider field value
+    user.provider="local";
+    //try to signup the user
+    user.save(function(err){
 
+      if(err){
+        //call the personal error parser
+        message=getErrorMessage(err);
+        //set the error message into the flash
+        req.flash("error",message);
+        //redirect to the signup view but with an error
+        return res.redirect('/signup');
+      }
+
+      req.login(user,function(err){
+        if(err){ return next(err) }
+        return res.redirect("/");
+      })
+
+    })
+  }
+  else{
+    res.redirect("/")
   }
 }
-
 
 //expose a create function to later create new users
 exports.create=function(req,res,next){

@@ -11,11 +11,11 @@ module.exports=function(){
 
   passport.deserializeUser(function(id,done){
     //perform a query using the user id, also avoid to fetch the pass and salt fields
-    User.findById(id,'-password -salt',function(err,user){
+    User.findById(id,'-username -password -salt',function(err,user){
       done(err,user);
     })
   });
-  console.log("calling the passport config file...")
+
   //include the local strategy
   require('./strategies/local.js')();
 };

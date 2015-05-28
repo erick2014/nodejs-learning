@@ -2,7 +2,7 @@
 /*Index controller */
 
 exports.render=function(req,res){
-  var sess=req.session
+  let sess=req.session
   //well here, im trying to get the view property from session
   if(sess.views){
     sess.views++;
