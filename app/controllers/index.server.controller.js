@@ -3,6 +3,8 @@
 
 exports.render=function(req,res){
   let sess=req.session
+  let fullName="";
+  let user=null;
   //well here, im trying to get the view property from session
   if(sess.views){
     sess.views++;
@@ -12,11 +14,14 @@ exports.render=function(req,res){
   else{
     sess.views=1;
   }
+  if(req.user){
+    user=JSON.stringify(req.user)
+  }
 
   res.render('index',{
     title:"Index Page",
     content:"amm some text over here..",
-    userFullName: (req.user) ? req.user.fullName : ''
+    user:user
   });
 
 }
