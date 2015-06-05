@@ -1,0 +1,11 @@
+<div>
+  <br/>
+  <h1>Articles:</h1>
+  <ul>
+    <li ng-repeat="art in articles">
+      Title: {{art.title}} <br/>
+      Content: {{art.content}} <br/>
+      Creator: {{art.creator.firstName}} {{art.creator.lastName}}
+    </li>
+  </ul>
+</div>

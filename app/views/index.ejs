@@ -9,16 +9,17 @@
   <body ng-app="meanApp">
     <img src="img/logo.jpg" alt="Logo">
     <div>O: <%= content %></div>
-    <div ng-controller="UserCtrl">{{name}}</div>
+
     <!-- if the user is logged in show its name-->
     <% if( user ){ %>
       <a href="/signout">Sign out </a>
+
     <% }else{ %>
         <a href="/signin">Signin</a>
         <a href="/signup">Signout</a>
     <% } %>
 
-
+    <!-- the user has to be logged in-->
     <section ng-view></section>
 
     <!--set the user object into window object -->
@@ -26,22 +27,24 @@
       window.user=<%- user || 'null' %>
     </script>
 
-
     <!-- load angular library -->
     <script type="text/javascript" src="lib/angular/angular.js"></script>
     <!-- load the ngroute library -->
     <script type="text/javascript" src="lib/angular-route/angular-route.js"></script>
-    <!-- load example things -->
-    <script type="text/javascript" src="/example/example.client.module.js"></script>
-    <script type="text/javascript" src="/example/config/example.client.routes.js"></script>
-    <script type="text/javascript" src="/example/controllers/example.client.controller.js"></script>
 
-    <!-- load the users module-->
+    <!-- load the User files -->
     <script type="text/javascript" src="/usersMod/users.client.module.js"></script>
-    <!-- load the user's service-->
     <script type="text/javascript" src="/usersMod/services/authentication.client.service.js"></script>
-     <!-- load the user's controller-->
-    <script type="text/javascript" src="/usersMod/controllers/users.client.controller.js"></script>
+    <script type="text/javascript" src="/usersMod/services/getUsers.client.service.js"></script>
+
+    <!-- load the Article files -->
+    <script type="text/javascript" src="/articlesMod/articles.client.module.js"></script>
+    <script type="text/javascript" src="/articlesMod/config/articles.client.routes.js"></script>
+    <script type="text/javascript" src="/articlesMod/services/getArticlesFact.client.service.js"></script>
+    <script type="text/javascript" src="/articlesMod/controllers/articles.client.controller.js"></script>
+    <script type="text/javascript" src="/articlesMod/controllers/articlesNew.client.controller.js"></script>
+
+
 
     <!--load the main app-->
     <script type="text/javascript" src="/application.js"></script>

@@ -119,15 +119,15 @@ exports.create=function(req,res,next){
 
 //this method is for listing the documents(all)
 exports.listUsers=function(req,res,next){
-
-  //performing a query that matches all documents
-  User.find({},'firstName lastName email username',
-    function(err,docs){
-      if(err){
-        return next(err);
-      }else{
-        res.json(docs);
-      }
+  User
+  .find({},'firstName lastName email username')
+  .lean()
+  .exec(function(err,users){
+    if(err){
+      return next(err);
+    }else{
+      res.send(users);
+    }
   })
 }
 

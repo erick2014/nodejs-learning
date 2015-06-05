@@ -9,6 +9,8 @@ module.exports=function(){
   require("../app/models/user.server.model");
   //include the post's model
   require("../app/models/posts.server.model");
+  //include the article's module
+  require("../app/models/article.server.model");
   //return a moongose instance
   return db;
 }

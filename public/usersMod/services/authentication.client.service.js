@@ -1,4 +1,4 @@
-angular.module("users")
+angular.module("Users")
   .factory('Authentication',[
     function(){
       this.user=window.user;
