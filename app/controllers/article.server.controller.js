@@ -4,6 +4,14 @@ const Article=require("mongoose").model('Article');
 //include the error handler module
 const errorHandler=require("../models/errorsHandler.server.model.js");
 
+//validate if the user logged is owner of an article, then can edit or delete it
+exports.hasAuthorization=function(req,res,next){
+  //if the creator is not current logged in user, then deny the access
+  if( req.article.creator.id !==req.user.id ){
+    return res.status(403).send({ message:'User is not authorized' });
+  }
+}
+
 //create method will provide basic functionality to create a new article
 exports.create=function(req,res,next){
 

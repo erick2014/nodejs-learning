@@ -29,6 +29,15 @@ let getErrorMessage=function(err){
   return message;
 }
 
+//validate if an user is logged in on each request
+exports.requiresLogin=function(req,res,next){
+  if( !req.isAuthenticated() ){
+    return res.status(401).send({ message:'User is not logged in' });
+  }
+  //if the user is logged in then execute the next middleware
+  next();
+}
+
 //define a render Signin method for login purposes
 exports.renderSignin=function(req,res,next){
   //check if the user is not logged in

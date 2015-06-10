@@ -4,7 +4,6 @@
    $scope.articles=[];
    //get the articles
     getArticlesFact().then(function(articles){
-      console.log("getting articles...",articles);
       $scope.articles=articles.data;
     });
   }

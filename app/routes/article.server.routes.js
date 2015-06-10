@@ -2,20 +2,28 @@
 /*This route will controll the route for users */
 
 //include the users controller
+const users=require("../controllers/users.server.controller");
 const articles=require("../controllers/article.server.controller");
 
 //export the route passing it the app object
 module.exports=function(app){
-  app.route("/articles")
+  app.route("/api/articles")
   .get(articles.list)
-  .post(articles.create)
+  //before to create create an article validate the loggin
+  .post( users.requiresLogin,articles.create)
 
-  app.param(":id",articles.articleById);
+  app.param("articleId",articles.articleById);
 
-  app.route("/articles/:id")
+  app.route("/api/articles/:articleId")
   	.get(articles.read)
-  	.put(articles.update)
-  	.delete(articles.delete);
+    //before to update an article, validate the loggin
+    //later check if the creator is logged in
+  	.put( users.requiresLogin )
+    .put( articles.hasAuthorization ) 
+    .put( articles.update )
+     //before to delete an article, validate the loggin
+    //later check if the creator is logged in
+  	.delete( users.requiresLogin, articles.hasAuthorization, articles.delete);
 
   //error middleware handler
   app.use(function(err,req,res,next){

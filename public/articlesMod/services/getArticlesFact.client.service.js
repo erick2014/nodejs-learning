@@ -3,7 +3,7 @@ angular.module("Article").factory('getArticlesFact',['$http',
     var promise;
     return function(){
       if(!promise){
-          promise= $http.get('/articles');
+          promise= $http.get('/api/articles');
       }
       return promise;
     }
