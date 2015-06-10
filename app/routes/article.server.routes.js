@@ -10,6 +10,13 @@ module.exports=function(app){
   .get(articles.list)
   .post(articles.create)
 
+  app.param(":id",articles.articleById);
+
+  app.route("/articles/:id")
+  	.get(articles.read)
+  	.put(articles.update)
+  	.delete(articles.delete);
+
   //error middleware handler
   app.use(function(err,req,res,next){
     res.send(err);
